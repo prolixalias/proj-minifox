@@ -1,0 +1,22 @@
+# Policies
+
+Configuration policies are specially namespaced Puppet classes defined at the
+project level. Policies are located in the project's `policies/` directory.
+They are namespaced with "policy::", and the name of the filename of the
+specific policy. For example, `policies/baseline.pp` should contain a Puppet
+class named "policy::baseline`.
+
+    policies/
+      Contains all the policies in the project.
+    
+      baseline.pp
+        Policy classes are namespaced with "policy::" and the name of the defining
+        file. For example, this class is named "policy::baseline".
+    
+      windows/
+        You can group policy classes in subdirectories of the policies directory.
+        The name of the subdirectories add namespace elements to the policy class
+        names.
+    
+        legal_noticies.pp
+          This class is named "policy::windows::legal_notices"

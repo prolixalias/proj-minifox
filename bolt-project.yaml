@@ -1,0 +1,21 @@
+---
+name: minifox
+modulepath: ['.policies_fixture']
+policies:
+- 'policy::*'
+modules:
+- name: ghoneycutt/ssh
+- name: jpadams/puppet_vim_env
+- name: nexcess/auditd
+- name: puppet/chrony
+- name: puppet/epel
+- name: puppet/windows_firewall
+- name: puppetlabs/chocolatey
+- name: puppetlabs/firewall
+- name: puppetlabs/git
+- name: puppetlabs/motd
+- name: puppetlabs/ntp
+- name: puppetlabs/reboot
+- name: puppetlabs/registry
+- name: puppetlabs/stdlib
+- name: tse/winntp
