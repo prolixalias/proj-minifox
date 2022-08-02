@@ -1,7 +1,7 @@
 #
 
 #
-class pminifox::olicy::compliance::hipaa::windows {
+class minifox::policy::compliance::hipaa::windows {
   # HIPAA Administrative Simplification Regulation Text
   # https://www.hhs.gov/sites/default/files/hipaa-simplification-201303.pdf?language=es
 
