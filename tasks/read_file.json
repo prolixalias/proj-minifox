@@ -1,0 +1,12 @@
+{
+    "description": "Read the contents of a file",
+    "parameters": {
+      "path": {
+        "type": "String",
+        "description": "Path to the file to read"
+      }
+    },
+    "implementations": [
+      {"name": "read_file.sh", "requirements": ["shell"], "input_method": "environment"}
+    ]
+  }

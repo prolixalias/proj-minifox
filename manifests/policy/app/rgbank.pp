@@ -1,0 +1,34 @@
+#
+
+#
+class minifox::policy::app::rgbank {
+  if $facts['os']['family'] != 'RedHat' {
+    fail('Unsupported OS')
+  }
+
+  require minifox::policy::app::rgbank::db
+  require minifox::policy::app::rgbank::webhead
+
+  rgbank::db { 'default':
+    user     => 'rgbank',
+    password => 'rgbank',
+  }
+
+  rgbank::web { 'default':
+    db_name     => 'rgbank-default',
+    db_host     => 'localhost',
+    db_user     => 'rgbank',
+    db_password => 'rgbank',
+    listen_port => 8888,
+  }
+
+  $default = {
+    'host' => $facts['networking']['fqdn'],
+    'port' => 8888,
+    'ip'   => '127.0.0.1',
+  }
+
+  rgbank::load { 'default':
+    balancermembers => [$default,],
+  }
+}

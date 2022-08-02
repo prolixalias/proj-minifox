@@ -1,0 +1,2 @@
+---
+minifox::policy::baseline::time::timeclass: 'skip'

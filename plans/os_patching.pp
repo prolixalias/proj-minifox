@@ -1,5 +1,3 @@
-plan automations::os_patching (
+plan minifox::os_patching (
   TargetSpec $targets,
-) {
-
-}
+) {}

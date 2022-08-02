@@ -25,3 +25,81 @@
 #     user: Administrator
 #     password: Bolt!
 #     ssl: false
+
+---
+
+# To read more about inventory files, see https://pup.pt/bolt-inventory
+
+groups:
+  - name: local
+    targets:
+      - name: localhost
+        uri: 127.0.0.1
+        config:
+          transport: local
+          local:
+            run-as: ptalbot
+            tmpdir: "/var/tmp"
+  - name: proxies
+    targets:
+      - name: proxy.fervid.us
+        uri: proxy.fervid.us
+      - name: proxy.rybamarine.com
+        uri: proxy.rybamarine.com
+    config:
+      transport: ssh
+      ssh:
+        user: ptalbot
+        private-key: "~/.ssh/id_ed25519"
+        host-key-check: false
+        cleanup: true
+        tty: true
+        run-as: root
+  - name: puppetservers
+    targets:
+      - name: puppetserver.fervid.us
+        uri: puppetserver.fervid.us
+      - name: puppetserver.rybamarine.com
+        uri: puppetserver.rybamarine.com
+    config:
+      transport: ssh
+      ssh:
+        user: ptalbot
+        private-key: "~/.ssh/id_ed25519"
+        host-key-check: false
+        cleanup: true
+        tty: true
+        run-as: root
+
+targets:
+  - uri: 127.0.0.1
+    name: localhost
+    vars:
+      cert_common_names:
+        - remote
+      certbot_binary: '/usr/bin/env certbot'
+      certbot_working_dir: /Users/ptalbot/letsencrypt
+  - uri: proxy.rybamarine.com
+    name: proxy.rybamarine.com
+    vars:
+      cert_common_names:
+        - nexus
+        - proxy
+        - proxy.localdev
+        - '*'
+      certbot_binary: /var/lib/snapd/snap/bin/certbot
+      certbot_working_dir: /etc/letsencrypt
+  - uri: puppetserver.rybamarine.com
+    name: puppetserver.rybamarine.com
+    vars:
+      cert_common_names:
+        - puppet
+      certbot_binary: /var/lib/snapd/snap/bin/certbot
+      certbot_working_dir: /etc/letsencrypt
+  - uri: puppetserver.fervid.us
+    name: puppetserver.fervid.us
+    vars:
+      cert_common_names:
+        - puppet
+      certbot_binary: /var/lib/snapd/snap/bin/certbot
+      certbot_working_dir: /etc/letsencrypt
